@@ -124,3 +124,19 @@
 .disconnect-btn:hover {
   background: rgba(231, 76, 60, 1);
 }
+
+.wallet-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.wallet-balance {
+  font-size: 0.8rem;
+  color: #2ecc71;
+  opacity: 0.9;
+}
+
+.wallet-balance.error {
+  color: #e74c3c;
+}

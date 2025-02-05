@@ -1,22 +1,12 @@
-import { useState, useEffect } from 'react';
-import { createConfig, WagmiConfig, useAccount, useConnect, useDisconnect } from 'wagmi';
-import { mainnet } from 'viem/chains';
-import { createPublicClient, http } from 'viem';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useState } from 'react';
+import { useAccount, useConnect, useDisconnect } from 'wagmi';
+import { useWalletData } from '../hooks/useWalletData';
 
-const queryClient = new QueryClient();
-
-const config = createConfig({
-  chains: [mainnet],
-  transports: {
-    [mainnet.id]: http()
-  }
-});
-
-const WalletConnectButton = () => {
+const WalletConnect = () => {
   const { address, isConnected } = useAccount();
-  const { connect, isLoading, connectors } = useConnect();
+  const { connect, isLoading: isConnecting, connectors } = useConnect();
   const { disconnect } = useDisconnect();
+  const { walletData, isLoading: isLoadingData, error } = useWalletData(address, isConnected);
 
   const handleConnect = async () => {
     try {
@@ -34,15 +24,26 @@ const WalletConnectButton = () => {
         <button 
           className="connect-wallet-btn"
           onClick={handleConnect}
-          disabled={isLoading}
+          disabled={isConnecting}
         >
-          {isLoading ? 'Connecting...' : 'Connect Wallet'}
+          {isConnecting ? 'Connecting...' : 'Connect Wallet'}
         </button>
       ) : (
         <div className="wallet-info">
-          <span className="wallet-address">
-            {`${address?.slice(0, 6)}...${address?.slice(-4)}`}
-          </span>
+          <div className="wallet-details">
+            <span className="wallet-address">
+              {`${address?.slice(0, 6)}...${address?.slice(-4)}`}
+            </span>
+            {isLoadingData ? (
+              <span className="wallet-balance">Loading...</span>
+            ) : error ? (
+              <span className="wallet-balance error">Error loading data</span>
+            ) : walletData && (
+              <span className="wallet-balance">
+                {walletData.balances?.items?.length || 0} tokens
+              </span>
+            )}
+          </div>
           <button 
             className="disconnect-btn"
             onClick={() => disconnect()}
@@ -52,16 +53,6 @@ const WalletConnectButton = () => {
         </div>
       )}
     </div>
-  );
-};
-
-const WalletConnect = () => {
-  return (
-    <WagmiConfig config={config}>
-      <QueryClientProvider client={queryClient}>
-        <WalletConnectButton />
-      </QueryClientProvider>
-    </WagmiConfig>
   );
 };
 
