@@ -24,6 +24,18 @@ export const useMultiChainData = (address, isConnected) => {
             console.log(`Fetching data for ${chain.name} (${chainName})`);
             
             const balances = await walletService.getWalletBalances(address, chainName);
+            
+            // Check if balances data is valid
+            if (!balances || !balances.items) {
+              console.warn(`No valid data returned for ${chain.name}`);
+              return {
+                chain: chain.name,
+                data: { items: [] },
+                icon: chain.icon,
+                error: new Error('No data available')
+              };
+            }
+
             return {
               chain: chain.name,
               data: balances,
@@ -45,6 +57,18 @@ export const useMultiChainData = (address, isConnected) => {
           (async () => {
             try {
               const balances = await walletService.getWalletBalances(address, 'solana-mainnet');
+              
+              // Check if Solana balances data is valid
+              if (!balances || !balances.items) {
+                console.warn('No valid data returned for Solana');
+                return {
+                  chain: 'Solana',
+                  data: { items: [] },
+                  icon: '/chain-icons/sol.png',
+                  error: new Error('No data available')
+                };
+              }
+
               return {
                 chain: 'Solana',
                 data: balances,
@@ -68,20 +92,20 @@ export const useMultiChainData = (address, isConnected) => {
         let newTotalValue = 0;
 
         results.forEach((chainData) => {
+          // Ensure data.items exists before reducing
+          const items = chainData.data?.items || [];
+          const chainTotal = items.reduce(
+            (sum, item) => sum + Number(item.quote || 0),
+            0
+          );
+
+          newMultiChainData[chainData.chain] = {
+            ...chainData,
+            totalValue: chainTotal
+          };
+          
           if (!chainData.error) {
-            newMultiChainData[chainData.chain] = {
-              ...chainData,
-              totalValue: chainData.data.items?.reduce(
-                (sum, item) => sum + Number(item.quote || 0),
-                0
-              ) || 0
-            };
-            newTotalValue += newMultiChainData[chainData.chain].totalValue;
-          } else {
-            newMultiChainData[chainData.chain] = {
-              ...chainData,
-              totalValue: 0
-            };
+            newTotalValue += chainTotal;
           }
         });
 
