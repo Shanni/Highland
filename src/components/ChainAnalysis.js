@@ -6,6 +6,7 @@ import DistributionBarChart from './charts/DistributionBarChart';
 import ChainSelector from './ChainSelector';
 import { useWalletData } from '../hooks/useWalletData';
 import { SUPPORTED_CHAINS } from '../config/wagmi';
+import TransactionHistory from './TransactionHistory';
 
 const ChainAnalysis = () => {
   const { address, isConnected } = useAccount();
@@ -35,28 +36,32 @@ const ChainAnalysis = () => {
 
   return (
     <div className="chain-analysis">
-      <div className="portfolio-header">
-        <h2>Chain Analysis</h2>
-        <div className="portfolio-controls">
+      <div className="chain-content">
+        <div className="chain-header">
+          <div className="header-left">
+            <h2>{selectedChain.name} Analysis</h2>
+            <p className="chain-total-value">
+              Total Value: ${totalValue.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+            </p>
+          </div>
           <ChainSelector 
             selectedChain={selectedChain}
             onChainSelect={setSelectedChain}
           />
         </div>
-        <p className="portfolio-total">
-          Chain Value: ${totalValue.toLocaleString('en-US', { minimumFractionDigits: 2 })}
-        </p>
-      </div>
 
-      <div className="portfolio-charts">
-        <PortfolioPieChart data={assets} />
-        <DistributionBarChart data={assets} />
-      </div>
+        <div className="portfolio-charts">
+          <PortfolioPieChart data={assets} />
+          <DistributionBarChart data={assets} />
+        </div>
 
-      <div className="portfolio-grid">
-        {assets.map((asset) => (
-          <AssetCard key={asset.contract_address} asset={asset} />
-        ))}
+        <div className="portfolio-grid">
+          {assets.map((asset) => (
+            <AssetCard key={asset.contract_address} asset={asset} />
+          ))}
+        </div>
+
+        <TransactionHistory chainName={selectedChain.name} />
       </div>
     </div>
   );

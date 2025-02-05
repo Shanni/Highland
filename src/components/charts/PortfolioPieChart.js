@@ -1,22 +1,41 @@
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 
+// Updated harmonious color palette
 const COLORS = [
-  'rgb(56, 95, 58)',    // Forest Green
-  'rgb(131, 97, 83)',   // Earth Brown
-  'rgb(47, 67, 99)',    // Navy Blue
-  'rgb(172, 134, 148)', // Mauve
-  'rgb(82, 57, 101)',   // Deep Purple
-  'rgb(96, 92, 132)',   // Dusty Purple
+  '#10B981', // Emerald
+  '#3B82F6', // Blue
+  '#8B5CF6', // Purple
+  '#F59E0B', // Amber
+  '#EC4899', // Pink
+  '#06B6D4', // Cyan
 ];
 
-const PortfolioPieChart = ({ data }) => {
-  const formattedData = data?.map((item, index) => ({
-    name: item.contract_ticker_symbol,
-    value: Number(item.quote || 0),
-    color: COLORS[index % COLORS.length]
-  })).filter(item => item.value > 0) || [];
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="chart-tooltip">
+        <div className="tooltip-header">
+          <span className="tooltip-label">{payload[0].name}</span>
+        </div>
+        <div className="tooltip-value">
+          ${Number(payload[0].value).toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          })}
+        </div>
+      </div>
+    );
+  }
+  return null;
+};
 
-  const sortedData = formattedData
+const PortfolioPieChart = ({ data }) => {
+  const formattedData = data
+    ?.map((item) => ({
+      name: item.contract_ticker_symbol,
+      value: Number(item.quote || 0)
+    }))
+    .filter(item => item.value > 0)
     .sort((a, b) => b.value - a.value)
     .slice(0, 6);
 
@@ -26,26 +45,34 @@ const PortfolioPieChart = ({ data }) => {
       <ResponsiveContainer width="100%" height={300}>
         <PieChart>
           <Pie
-            data={sortedData}
+            data={formattedData}
             cx="50%"
             cy="50%"
             labelLine={false}
             outerRadius={100}
-            fill="#8884d8"
+            innerRadius={60}
             dataKey="value"
-            label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+            label={({ name, percent }) => 
+              `${name} ${(percent * 100).toFixed(1)}%`
+            }
+            strokeWidth={1}
           >
-            {sortedData.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={entry.color} />
+            {formattedData.map((entry, index) => (
+              <Cell 
+                key={`cell-${index}`} 
+                fill={COLORS[index % COLORS.length]}
+                opacity={0.9}
+              />
             ))}
           </Pie>
-          <Tooltip 
-            formatter={(value) => `$${Number(value).toLocaleString('en-US', {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2
-            })}`}
+          <Tooltip content={<CustomTooltip />} />
+          <Legend 
+            verticalAlign="bottom"
+            height={36}
+            formatter={(value) => (
+              <span style={{ color: 'white', fontSize: '0.9rem' }}>{value}</span>
+            )}
           />
-          <Legend />
         </PieChart>
       </ResponsiveContainer>
     </div>

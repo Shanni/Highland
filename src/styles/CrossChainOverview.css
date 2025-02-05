@@ -1,5 +1,5 @@
 .cross-chain-overview {
-  background: var(--color-bg-dark);
+  background: var(--color-bg);
   border-radius: 12px;
   margin-bottom: 2rem;
   backdrop-filter: blur(10px);
@@ -51,7 +51,7 @@
 .cross-chain-total {
   text-align: center;
   font-size: 1.5rem;
-  color: #2ecc71;
+  color: var(--color-success);
   margin-bottom: 2rem;
 }
 
