@@ -34,7 +34,7 @@ const AssetCard = ({ asset }) => {
           {formatValue(asset.quote_rate)}
         </p>
         <p className="asset-balance">
-          Balance: {formatBalance(asset.balance / Math.pow(10, asset.contract_decimals))} {asset.contract_ticker_symbol}
+          Balance: {formatBalance(asset.balance)} {asset.contract_ticker_symbol}
         </p>
         <p className="asset-value">
           Value: {formatValue(asset.quote)}

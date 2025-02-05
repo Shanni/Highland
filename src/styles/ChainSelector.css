@@ -1,0 +1,66 @@
+.chain-selector {
+  position: relative;
+  margin-right: 1rem;
+}
+
+.chain-selector-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chain-selector-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.chain-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.arrow {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.chain-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 0.5rem;
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 100;
+}
+
+.chain-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chain-option:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.chain-option.selected {
+  background: rgba(46, 204, 113, 0.2);
+} 

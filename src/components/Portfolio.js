@@ -3,12 +3,16 @@ import { useAccount } from 'wagmi';
 import AssetCard from './AssetCard';
 import PortfolioPieChart from './charts/PortfolioPieChart';
 import DistributionBarChart from './charts/DistributionBarChart';
+import ChainSelector from './ChainSelector';
 import { useWalletData } from '../hooks/useWalletData';
+import { SUPPORTED_CHAINS } from '../config/wagmi';
 import '../styles/Portfolio.css';
+import CrossChainOverview from './CrossChainOverview';
 
 const Portfolio = () => {
   const { address, isConnected } = useAccount();
-  const { walletData, isLoading, error } = useWalletData(address, isConnected);
+  const [selectedChain, setSelectedChain] = useState(SUPPORTED_CHAINS[0]);
+  const { walletData, isLoading, error } = useWalletData(address, isConnected, selectedChain);
   const [totalValue, setTotalValue] = useState(0);
 
   useEffect(() => {
@@ -43,10 +47,18 @@ const Portfolio = () => {
     <div className="portfolio">
       <div className="portfolio-header">
         <h2>Your Mountain Peak Assets</h2>
+        <div className="portfolio-controls">
+          <ChainSelector 
+            selectedChain={selectedChain}
+            onChainSelect={setSelectedChain}
+          />
+        </div>
         <p className="portfolio-total">
           Total Value: ${totalValue.toLocaleString('en-US', { minimumFractionDigits: 2 })}
         </p>
       </div>
+
+      <CrossChainOverview />
 
       <div className="portfolio-charts">
         <PortfolioPieChart data={assets} />
