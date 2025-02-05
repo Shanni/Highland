@@ -116,4 +116,27 @@
   margin-top: 0.5rem;
   font-weight: bold;
   color: #2ecc71;
+}
+
+.portfolio-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.portfolio-content {
+  flex: 1;
+  margin-left: 240px; /* Match navigation width */
+  padding: 2rem;
+  transition: margin-left 0.3s ease;
+}
+
+.navigation.collapsed + .portfolio-content {
+  margin-left: 64px;
+}
+
+.coming-soon {
+  text-align: center;
+  padding: 4rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.2rem;
 } 

@@ -1,16 +1,51 @@
 .cross-chain-overview {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-bg-dark);
   border-radius: 12px;
-  padding: 2rem;
   margin-bottom: 2rem;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(177, 177, 134, 0.1);
+  overflow: hidden;
 }
 
-.cross-chain-overview h3 {
-  text-align: center;
-  margin-bottom: 1rem;
+.overview-header {
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.overview-header:hover {
+  background: var(--color-bg-primary);
+}
+
+.overview-title {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.overview-title h3 {
+  margin: 0;
+  font-size: 1.25rem;
   color: #ffffff;
+}
+
+.total-value {
+  font-size: 1.25rem;
+  color: var(--color-success);
+}
+
+.overview-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.overview-content.expanded {
+  max-height: 800px;
+  padding: 0 2rem 2rem;
 }
 
 .cross-chain-total {
@@ -37,14 +72,15 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-bg-primary);
   border-radius: 8px;
   transition: transform 0.2s ease;
+  border: 1px solid rgba(177, 177, 134, 0.1);
 }
 
 .chain-item:hover {
   transform: translateX(5px);
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-bg-secondary);
 }
 
 .chain-header {
@@ -66,18 +102,19 @@
 
 .chain-value {
   font-weight: bold;
-  color: #2ecc71;
+  color: var(--color-success);
   margin: 0 1rem;
 }
 
 .chain-percentage {
-  color: #a8c0ff;
+  color: var(--color-text-secondary);
   min-width: 60px;
   text-align: right;
 }
 
 .chain-chart {
   min-height: 300px;
+  padding: 1rem;
 }
 
 .cross-chain-loading,
@@ -110,4 +147,66 @@
   .cross-chain-distribution {
     grid-template-columns: 1fr;
   }
+}
+
+/* Update animation for chevron */
+.overview-header svg {
+  transition: transform 0.3s ease;
+  color: #ffffff;
+}
+
+.overview-header:hover svg {
+  transform: scale(1.2);
+}
+
+/* Add styles for the custom tooltip */
+.chain-tooltip {
+  background: rgba(17, 25, 40, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.75rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.chain-tooltip-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-text-secondary);
+}
+
+.chain-tooltip-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.chain-tooltip-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-success-light);
+}
+
+/* Make the pie chart labels more visible */
+.recharts-pie-label-text {
+  fill: var(--color-text-primary);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* Enhance legend visibility */
+.recharts-legend-item-text {
+  color: var(--color-text-primary) !important;
+}
+
+/* Add subtle animation to chart elements */
+.recharts-sector {
+  transition: opacity 0.3s ease;
+  filter: brightness(1.1);
+}
+
+.recharts-sector:hover {
+  opacity: 0.85;
+  filter: brightness(1.2);
 } 

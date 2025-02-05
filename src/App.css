@@ -1,3 +1,37 @@
+:root {
+  /* Primary Colors */
+  --color-primary: rgb(116, 131, 107);      /* Sage Green */
+  --color-primary-dark: rgb(56, 95, 58);    /* Forest Green */
+  --color-primary-light: rgb(177, 177, 134); /* Light Sage */
+
+  /* Secondary Colors */
+  --color-secondary: rgb(131, 97, 83);      /* Earth Brown */
+  --color-secondary-dark: rgb(109, 59, 57);  /* Deep Rust */
+  --color-secondary-light: rgb(159, 120, 114); /* Dusty Rose */
+
+  /* Accent Colors */
+  --color-accent-1: rgb(47, 67, 99);        /* Navy Blue */
+  --color-accent-2: rgb(172, 134, 148);     /* Mauve */
+  --color-accent-3: rgb(82, 57, 101);       /* Deep Purple */
+  --color-accent-4: rgb(96, 92, 132);       /* Dusty Purple */
+
+  /* UI Colors */
+  --color-success: rgb(34, 197, 94);          /* Bright green */
+  --color-success-light: rgb(132, 225, 155);  /* Light green */
+  --color-error: rgb(109, 59, 57);          /* Deep Rust */
+  --color-warning: rgb(177, 177, 134);      /* Light Sage */
+  
+  /* Background Colors */
+  --color-bg-primary: rgba(116, 131, 107, 0.1);
+  --color-bg-secondary: rgba(131, 97, 83, 0.1);
+  --color-bg-dark: rgba(29, 40, 55, 0.418);
+  
+  /* Text Colors - Brighter versions */
+  --color-text-primary: rgb(255, 255, 255);    /* Pure white */
+  --color-text-secondary: rgb(226, 232, 240);  /* Bright gray */
+  --color-text-muted: rgba(255, 255, 255, 0.8);/* Semi-transparent white */
+}
+
 .App {
   text-align: center;
 }
@@ -40,20 +74,20 @@
 .app {
   min-height: 100vh;
   background: linear-gradient(
-    rgba(44, 62, 80, 0.7),
-    rgba(52, 152, 219, 0.4)
+    rgba(202, 240, 204, 0.454),
+    rgba(38, 62, 100, 0.8)
   ),
   url('/public/highland-bg.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  color: #ffffff;
+  color: var(--color-text-primary);
 }
 
 .app-header {
   padding: 2rem;
-  background: rgba(0, 0, 0, 0.4);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--color-bg-dark);
+  border-bottom: 1px solid rgba(177, 177, 134, 0.1);
   backdrop-filter: blur(5px);
   display: flex;
   justify-content: space-between;
@@ -80,24 +114,24 @@
 
 .connect-wallet-btn {
   padding: 0.8rem 1.5rem;
-  background: rgba(46, 204, 113, 0.8);
-  border: none;
+  background: rgba(56, 95, 58, 0.9);
+  border: 1px solid rgba(177, 177, 134, 0.2);
   border-radius: 8px;
-  color: white;
+  color: var(--color-text-primary);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  backdrop-filter: blur(5px);
 }
 
 .connect-wallet-btn:hover {
-  background: rgba(46, 204, 113, 1);
-  transform: translateY(-2px);
+  background: rgba(56, 95, 58, 1);
+  border-color: rgba(177, 177, 134, 0.4);
 }
 
 .wallet-info {
   padding: 0.8rem 1.5rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-bg-primary);
+  border: 1px solid rgba(177, 177, 134, 0.2);
   border-radius: 8px;
   backdrop-filter: blur(5px);
   display: flex;
@@ -112,8 +146,8 @@
 
 .disconnect-btn {
   padding: 0.4rem 0.8rem;
-  background: rgba(231, 76, 60, 0.8);
-  border: none;
+  background: rgba(182, 29, 23, 0.8);
+  border: 1px solid rgba(177, 177, 134, 0.2);
   border-radius: 4px;
   color: white;
   font-size: 0.8rem;
@@ -122,7 +156,7 @@
 }
 
 .disconnect-btn:hover {
-  background: rgba(231, 76, 60, 1);
+  background: rgba(109, 59, 57, 1);
 }
 
 .wallet-details {
@@ -133,10 +167,10 @@
 
 .wallet-balance {
   font-size: 0.8rem;
-  color: #2ecc71;
+  color: var(--color-text-secondary);
   opacity: 0.9;
 }
 
 .wallet-balance.error {
-  color: #e74c3c;
+  color: var(--color-error);
 }

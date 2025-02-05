@@ -1,6 +1,13 @@
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 
-const COLORS = ['#2ecc71', '#3498db', '#9b59b6', '#e74c3c', '#f1c40f', '#1abc9c'];
+const COLORS = [
+  'rgb(56, 95, 58)',    // Forest Green
+  'rgb(131, 97, 83)',   // Earth Brown
+  'rgb(47, 67, 99)',    // Navy Blue
+  'rgb(172, 134, 148)', // Mauve
+  'rgb(82, 57, 101)',   // Deep Purple
+  'rgb(96, 92, 132)',   // Dusty Purple
+];
 
 const PortfolioPieChart = ({ data }) => {
   const formattedData = data?.map((item, index) => ({

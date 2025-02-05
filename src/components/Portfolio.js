@@ -8,12 +8,15 @@ import { useWalletData } from '../hooks/useWalletData';
 import { SUPPORTED_CHAINS } from '../config/wagmi';
 import '../styles/Portfolio.css';
 import CrossChainOverview from './CrossChainOverview';
+import Navigation from './Navigation';
+import ChainAnalysis from './ChainAnalysis';
 
 const Portfolio = () => {
   const { address, isConnected } = useAccount();
   const [selectedChain, setSelectedChain] = useState(SUPPORTED_CHAINS[0]);
   const { walletData, isLoading, error } = useWalletData(address, isConnected, selectedChain);
   const [totalValue, setTotalValue] = useState(0);
+  const [activeSection, setActiveSection] = useState('overview');
 
   useEffect(() => {
     if (walletData?.balances?.items) {
@@ -44,32 +47,35 @@ const Portfolio = () => {
   const assets = walletData?.balances?.items || [];
 
   return (
-    <div className="portfolio">
-      <div className="portfolio-header">
-        <h2>Your Mountain Peak Assets</h2>
-        <div className="portfolio-controls">
-          <ChainSelector 
-            selectedChain={selectedChain}
-            onChainSelect={setSelectedChain}
-          />
-        </div>
-        <p className="portfolio-total">
-          Total Value: ${totalValue.toLocaleString('en-US', { minimumFractionDigits: 2 })}
-        </p>
-      </div>
-
-      <CrossChainOverview />
-
-      <div className="portfolio-charts">
-        <PortfolioPieChart data={assets} />
-        <DistributionBarChart data={assets} />
-      </div>
-
-      <div className="portfolio-grid">
-        {assets.map((asset) => (
-          <AssetCard key={asset.contract_address} asset={asset} />
-        ))}
-      </div>
+    <div className="portfolio-container">
+      <Navigation 
+        activeSection={activeSection}
+        onSectionChange={setActiveSection}
+      />
+      
+      <main className="portfolio-content">
+        {activeSection === 'overview' && (
+          <>
+            <CrossChainOverview />
+            <ChainAnalysis />
+          </>
+        )}
+        {activeSection === 'performance' && (
+          <div className="coming-soon">
+            Performance metrics coming soon...
+          </div>
+        )}
+        {activeSection === 'history' && (
+          <div className="coming-soon">
+            Transaction history coming soon...
+          </div>
+        )}
+        {activeSection === 'alerts' && (
+          <div className="coming-soon">
+            Price alerts coming soon...
+          </div>
+        )}
+      </main>
     </div>
   );
 };

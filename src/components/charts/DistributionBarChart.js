@@ -40,8 +40,8 @@ const DistributionBarChart = ({ data }) => {
           />
           <Bar 
             dataKey="value" 
-            fill="#3498db"
-            radius={[4, 4, 0, 0]}
+            fill="rgb(56, 95, 58)"
+            opacity={0.8}
           />
         </BarChart>
       </ResponsiveContainer>
