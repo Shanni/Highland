@@ -61,7 +61,7 @@ const ChainAnalysis = () => {
           ))}
         </div>
 
-        <TransactionHistory chainName={selectedChain.name} />
+        {/* <TransactionHistory chainName={selectedChain.name} /> */}
       </div>
     </div>
   );

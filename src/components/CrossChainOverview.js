@@ -66,7 +66,7 @@ const CrossChainOverview = () => {
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <div className="overview-title">
-          <h3>Cross-Chain Overview</h3>
+          <h3>Cross-Chain Asset Distribution</h3>
           <div className="total-value">
             Total Portfolio Value: ${totalValue.toLocaleString('en-US', { 
               minimumFractionDigits: 2,
@@ -84,10 +84,10 @@ const CrossChainOverview = () => {
               <div key={chain} className="chain-item">
                 <div className="chain-header">
                   <img src={data.icon} alt={chain} className="chain-icon" />
-                  <span className="chain-name">{chain}</span>
+                  <span className="chain-name">{chain} Chain</span>
                 </div>
                 <div className="chain-value">
-                  ${data.totalValue.toLocaleString('en-US', { 
+                  Total: ${data.totalValue.toLocaleString('en-US', { 
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2 
                   })}
