@@ -10,6 +10,8 @@ import '../styles/Portfolio.css';
 import CrossChainOverview from './CrossChainOverview';
 import Navigation from './Navigation';
 import ChainAnalysis from './ChainAnalysis';
+import AgenticRoundtable from './AgenticRoundtable';
+import OnchainActions from './OnchainActions';
 
 const Portfolio = () => {
   const { address, isConnected } = useAccount();
@@ -65,15 +67,11 @@ const Portfolio = () => {
             Performance metrics coming soon...
           </div>
         )}
-        {activeSection === 'history' && (
-          <div className="coming-soon">
-            Transaction history coming soon...
-          </div>
+        {activeSection === 'roundtable' && (
+          <AgenticRoundtable />
         )}
-        {activeSection === 'alerts' && (
-          <div className="coming-soon">
-            Price alerts coming soon...
-          </div>
+        {activeSection === 'actions' && (
+          <OnchainActions />
         )}
       </main>
     </div>

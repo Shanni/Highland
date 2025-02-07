@@ -5,6 +5,7 @@ const client = new GoldRushClient(COVALENT_API_KEY);
 
 export const getWalletActivity = async (walletAddress, chainName = "eth-mainnet") => {
   try {
+    console.log("Fetching wallet activity for address:", walletAddress);
     const response = await client.BaseService.getAddressActivity({
       chainName,
       address: walletAddress,

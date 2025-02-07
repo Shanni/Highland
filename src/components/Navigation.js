@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { 
+  Users,  // For Agentic Roundtable
+  Zap,    // For Onchain Actions
   Layers, 
-  Activity, 
+  Activity,
   Clock, 
   Bell,
   ChevronLeft,
@@ -22,6 +24,16 @@ const Navigation = ({ activeSection, onSectionChange }) => {
       id: 'performance',
       name: 'Performance Metrics',
       icon: <Activity size={20} />,
+    },
+    {
+      id: 'roundtable',
+      name: 'Agentic Roundtable',
+      icon: <Users size={20} />,
+    },
+    {
+      id: 'actions',
+      name: 'Onchain Actions',
+      icon: <Zap size={20} />,
     },
     {
       id: 'history',
