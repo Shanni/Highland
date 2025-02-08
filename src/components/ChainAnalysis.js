@@ -7,6 +7,7 @@ import ChainSelector from './ChainSelector';
 import { useWalletData } from '../hooks/useWalletData';
 import { SUPPORTED_CHAINS } from '../config/wagmi';
 import TransactionHistory from './TransactionHistory';
+import ChatBox from './ChatBox';
 
 const ChainAnalysis = () => {
   const { address, isConnected } = useAccount();
@@ -63,6 +64,14 @@ const ChainAnalysis = () => {
 
         {/* <TransactionHistory chainName={selectedChain.name} /> */}
       </div>
+      
+      <ChatBox 
+        walletAddress={address}
+        selectedChain={selectedChain}
+        walletData={walletData}
+        totalValue={totalValue}
+        isConnected={isConnected}
+      />
     </div>
   );
 };

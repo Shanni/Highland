@@ -3,7 +3,13 @@ import { MessageSquare, X, Send } from 'react-feather';
 import io from 'socket.io-client';
 import '../styles/ChatBox.css';
 
-const ChatBox = () => {
+const ChatBox = ({ 
+  walletAddress, 
+  selectedChain, 
+  walletData, 
+  totalValue,
+  isConnected 
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState('');
@@ -12,7 +18,7 @@ const ChatBox = () => {
   const socket = useRef(null);
 
   useEffect(() => {
-    // Initialize socket connection
+    // Initialize socket connection with context data
     socket.current = io('http://localhost:4000/chat');
 
     // Listen for incoming messages
@@ -26,8 +32,9 @@ const ChatBox = () => {
         socket.current.disconnect();
       }
     };
-  }, []);
+  }, [walletAddress, selectedChain, isConnected]);
 
+  // Scroll to bottom of chat
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -43,13 +50,36 @@ const ChatBox = () => {
     // Add user message to chat
     setMessages(prev => [...prev, { type: 'user', content: inputMessage }]);
     
-    // Emit message to server
-    socket.current.emit('input', inputMessage);
+    console.log(walletAddress, selectedChain.name, totalValue, walletData);
+    const currentChainAssets = walletData?.balances?.items?.map(asset => ({
+      symbol: asset.contract_ticker_symbol,
+      contract_address: asset.contract_address,
+      name: asset.contract_name,
+      ticker: asset.contract_ticker_symbol,
+      balance: Number(asset.balance) / Math.pow(10, asset.contract_decimals),
+      value: asset.quote,
+      price: asset.quote_rate,
+      value_24: asset.quote_24h,
+      price_24: asset.quote_rate_24h,
+      type: asset.type,
+      isNative: asset.native_token
+    })) || [];
+
+    // Prepare context object with relevant data
+    const context = {
+      walletAddress,
+      chainName: selectedChain.name,
+      totalValue,
+      assets: currentChainAssets
+    };
+
+    // Emit message with formatted context
+    socket.current.emit('input', JSON.stringify({
+      message: inputMessage,
+      context
+    }));
     
-    // Show AI is typing
     setIsTyping(true);
-    
-    // Clear input
     setInputMessage('');
   };
 
@@ -66,7 +96,10 @@ const ChatBox = () => {
       ) : (
         <div className="chatbox">
           <div className="chat-header">
-            <h3>Financial Advisor AI</h3>
+            <h3>Financial Analysis Assistant</h3>
+            {/* <div className="chat-context">
+              {selectedChain.name}
+            </div> */}
             <button 
               className="close-button"
               onClick={() => setIsOpen(false)}
@@ -97,7 +130,7 @@ const ChatBox = () => {
               type="text"
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
-              placeholder="Ask about your portfolio..."
+              placeholder={`Ask about ${selectedChain.name} portfolio...`}
               autoComplete="off"
             />
             <button type="submit">

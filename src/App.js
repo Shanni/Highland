@@ -1,11 +1,9 @@
-import { useState } from 'react';
 import { WagmiConfig } from 'wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import './App.css';
 import Portfolio from './components/Portfolio';
 import WalletConnect from './components/WalletConnect';
 import { config } from './config/wagmi';
-import ChatBox from './components/ChatBox';
 
 const queryClient = new QueryClient();
 
@@ -24,7 +22,6 @@ function App() {
           <main>
             <Portfolio />
           </main>
-          <ChatBox />
         </div>
       </QueryClientProvider>
     </WagmiConfig>

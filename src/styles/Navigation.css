@@ -22,7 +22,7 @@
   width: 24px;
   height: 24px;
   background: var(--color-bg-dark);
-  border: 1px solid rgba(177, 177, 134, 0.2);
+  border: 1px solid rgba(168, 168, 128, 0.2);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -55,7 +55,7 @@
 }
 
 .nav-item.active {
-  background: rgba(56, 95, 58, 0.2);
+  background: rgba(39, 39, 39, 0.154);
   color: var(--color-text-primary);
 }
 
