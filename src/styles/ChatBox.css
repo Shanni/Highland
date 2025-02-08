@@ -161,4 +161,24 @@
     bottom: 1rem;
     right: 1rem;
   }
+}
+
+.message p {
+  margin: 0 0 0.5rem 0;
+  line-height: 1.4;
+}
+
+.message p:last-child {
+  margin-bottom: 0;
+}
+
+.message strong {
+  color: var(--color-success);
+  font-weight: 600;
+}
+
+.message br {
+  display: block;
+  content: "";
+  margin: 0.5rem 0;
 } 

@@ -3,6 +3,22 @@ import { MessageSquare, X, Send } from 'react-feather';
 import io from 'socket.io-client';
 import '../styles/ChatBox.css';
 
+const formatMessage = (content) => {
+  if (!content) return '';
+  
+  // Split by newlines and filter out empty strings
+  return content.split('\n').map((line, i) => {
+    // Handle markdown-style bold text
+    const formattedLine = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    
+    return line.trim() ? (
+      <p key={i} dangerouslySetInnerHTML={{ __html: formattedLine }} />
+    ) : (
+      <br key={i} />
+    );
+  });
+};
+
 const ChatBox = ({ 
   walletAddress, 
   selectedChain, 
@@ -114,7 +130,7 @@ const ChatBox = ({
                 key={index} 
                 className={`message ${msg.type}`}
               >
-                {msg.content}
+                {formatMessage(msg.content)}
               </div>
             ))}
             {isTyping && (
