@@ -87,7 +87,7 @@ const OnchainActions = () => {
           <h2>Onchain Actions</h2>
           <span className="beta-tag">BETA</span>
         </div>
-        <p>AI-Assisted Transaction Planning</p>
+        <p>Sponsored by CDP Agentkit</p>
       </div>
 
       <div className="messages-area">
