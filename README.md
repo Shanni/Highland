@@ -1,70 +1,105 @@
-# Getting Started with Create React App
+# Highland: Peak Crypto Portfolio Manager 🏔️
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Highland is a modern, feature-rich cryptocurrency portfolio management application that provides real-time analysis, AI-powered insights, and advanced portfolio tracking across multiple chains.
 
-## Available Scripts
+## Features 🚀
 
-In the project directory, you can run:
+### Cross-Chain Portfolio Overview
+- Real-time portfolio valuation across multiple blockchains
+- Asset distribution visualization
+- Performance metrics and analytics
+- Support for major chains (Ethereum, Optimism, Arbitrum, Base)
 
-### `yarn start`
+### AI-Powered Analysis
+- **Portfolio Assistant**: Get real-time insights about your holdings
+- **Chain Analysis**: Detailed breakdown of assets per chain
+- **Agentic Roundtable**: Multi-agent discussion system for deeper analysis
+- **Onchain Actions (BETA)**: AI-assisted transaction planning powered by CDP Agentkit
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Technical Features
+- Real-time data updates via WebSocket
+- Responsive design for all devices
+- Secure wallet connection
+- Integration with Covalent API for accurate data
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Getting Started 🛠️
 
-### `yarn test`
+### Prerequisites
+- Node.js (v16 or higher)
+- npm or yarn
+- A modern web browser
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Installation
 
-### `yarn build`
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/highland.git
+cd highland
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Create a `.env` file in the root directory and add your API keys:
+```env
+REACT_APP_COVALENT_API_KEY=your_covalent_api_key
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. Start the development server:
+```bash
+npm start
+# or
+yarn start
+```
 
-### `yarn eject`
+### Backend Services
+Make sure to run the required backend services:
+- Chat service: `localhost:4000/chat`
+- Action service: `localhost:4000/baseAction`
+- News analysis: `localhost:4000/news-based-analysis`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Architecture 🏗️
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Frontend
+- React.js with modern hooks
+- Socket.IO for real-time communication
+- Recharts for data visualization
+- Wagmi for wallet integration
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Backend Services
+- WebSocket servers for real-time updates
+- AI agents for portfolio analysis
+- Chain interaction services
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Contributing 🤝
 
-## Learn More
+We welcome contributions! Please feel free to submit a Pull Request.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## License 📝
 
-### Code Splitting
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Acknowledgments 🙏
 
-### Analyzing the Bundle Size
+- [Covalent](https://www.covalenthq.com/) for blockchain data API
+- [CDP Agentkit](https://cdpagentkit.com) for AI agent infrastructure
+- [Wagmi](https://wagmi.sh/) for wallet integration
+- All our contributors and supporters
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Support 💬
 
-### Making a Progressive Web App
+For support, please open an issue in the repository or contact our team at support@highland.com
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Built with ❤️ by the Highland Team
