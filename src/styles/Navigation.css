@@ -105,4 +105,20 @@
   margin: 0;
   font-size: 0.8rem;
   opacity: 0.8;
+}
+
+.nav-label-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.beta-badge {
+  font-size: 0.6rem;
+  padding: 0.15rem 0.3rem;
+  background: var(--color-primary);
+  color: var(--color-text-primary);
+  border-radius: 4px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 } 

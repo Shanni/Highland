@@ -6,9 +6,7 @@ import '../styles/ChatBox.css';
 const formatMessage = (content) => {
   if (!content) return '';
   
-  // Split by newlines and filter out empty strings
   return content.split('\n').map((line, i) => {
-    // Handle markdown-style bold text
     const formattedLine = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     
     return line.trim() ? (

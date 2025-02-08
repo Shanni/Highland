@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Send, ExternalLink } from 'react-feather';
+import { Send, ExternalLink, MessageCircle } from 'react-feather';
 import io from 'socket.io-client';
 import '../styles/AgenticRoundtable.css';
 
@@ -8,7 +8,9 @@ const AgenticRoundtable = () => {
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [news, setNews] = useState([]);
+  const [aiDiscussion, setAiDiscussion] = useState([]);
   const messagesEndRef = useRef(null);
+  const discussionEndRef = useRef(null);
   const socket = useRef(null);
 
   useEffect(() => {
@@ -24,22 +26,31 @@ const AgenticRoundtable = () => {
     const newsSocket = io('http://localhost:4000/news');
     
     newsSocket.on('news-update', (newsData) => {
-      setNews(prev => [...newsData, ...prev].slice(0, 20)); // Keep latest 20 news items
+      setNews(prev => [...newsData, ...prev].slice(0, 20));
+    });
+
+    // AI Discussion socket connection
+    const analysisSocket = io('http://localhost:4000/news-based-analysis');
+    
+    analysisSocket.on('analysis-update', (analysis) => {
+      setAiDiscussion(prev => [...prev, analysis]);
     });
 
     return () => {
       if (socket.current) socket.current.disconnect();
       if (newsSocket) newsSocket.disconnect();
+      if (analysisSocket) analysisSocket.disconnect();
     };
   }, []);
 
-  const scrollToBottom = () => {
+  // Auto scroll for both chat areas
+  useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  }, [messages]);
 
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+    discussionEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [aiDiscussion]);
 
   const handleSendMessage = (e) => {
     e.preventDefault();
@@ -88,39 +99,68 @@ const AgenticRoundtable = () => {
           </div>
         </div>
 
-        {/* Chat Section */}
+        {/* Main Chat Section */}
         <div className="chat-section">
-          <div className="roundtable-header">
-            <h2>Agentic Roundtable</h2>
-            <p>Collaborative AI Discussion for Portfolio Strategy</p>
-          </div>
-
-          <div className="messages-area">
-            {messages.map((msg, index) => (
-              <div key={index} className={`message ${msg.type}`}>
-                {msg.content}
+          <div className="chat-layout">
+            {/* User Chat Area */}
+            <div className="user-chat-area">
+              <div className="roundtable-header">
+                <h2>Agentic Roundtable</h2>
+                <p>Collaborative AI Discussion for Portfolio Strategy</p>
               </div>
-            ))}
-            {isTyping && (
-              <div className="message assistant typing">
-                Advisor Agent is typing<span>.</span><span>.</span><span>.</span>
-              </div>
-            )}
-            <div ref={messagesEndRef} />
-          </div>
 
-          <form onSubmit={handleSendMessage} className="message-input">
-            <input
-              type="text"
-              value={inputMessage}
-              onChange={(e) => setInputMessage(e.target.value)}
-              placeholder="Discuss your portfolio strategy..."
-              autoComplete="off"
-            />
-            <button type="submit">
-              <Send size={20} />
-            </button>
-          </form>
+              <div className="messages-area">
+                {messages.map((msg, index) => (
+                  <div key={index} className={`message ${msg.type}`}>
+                    {msg.content}
+                  </div>
+                ))}
+                {isTyping && (
+                  <div className="message assistant typing">
+                    Advisor Agent is typing<span>.</span><span>.</span><span>.</span>
+                  </div>
+                )}
+                <div ref={messagesEndRef} />
+              </div>
+
+              <form onSubmit={handleSendMessage} className="message-input">
+                <input
+                  type="text"
+                  value={inputMessage}
+                  onChange={(e) => setInputMessage(e.target.value)}
+                  placeholder="Discuss your portfolio strategy..."
+                  autoComplete="off"
+                />
+                <button type="submit">
+                  <Send size={20} />
+                </button>
+              </form>
+            </div>
+
+            {/* AI Discussion Area */}
+            <div className="ai-discussion-area">
+              <div className="discussion-header">
+                <h3>AI Market Analysis</h3>
+                <p>Real-time insights from AI agents</p>
+              </div>
+              <div className="discussion-messages">
+                {aiDiscussion.map((item, index) => (
+                  <div key={index} className="discussion-item">
+                    <div className="discussion-meta">
+                      <span className="agent-name">{item.agent}</span>
+                      <span className="discussion-time">
+                        {new Date(item.timestamp).toLocaleTimeString()}
+                      </span>
+                    </div>
+                    <div className="discussion-content">
+                      {item.content}
+                    </div>
+                  </div>
+                ))}
+                <div ref={discussionEndRef} />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

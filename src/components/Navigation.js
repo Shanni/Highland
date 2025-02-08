@@ -34,6 +34,7 @@ const Navigation = ({ activeSection, onSectionChange }) => {
       id: 'actions',
       name: 'Onchain Actions',
       icon: <Zap size={20} />,
+      isBeta: true
     },
     {
       id: 'history',
@@ -64,7 +65,12 @@ const Navigation = ({ activeSection, onSectionChange }) => {
             onClick={() => onSectionChange(section.id)}
           >
             <div className="nav-icon">{section.icon}</div>
-            {isExpanded && <span className="nav-label">{section.name}</span>}
+            {isExpanded && (
+              <div className="nav-label-container">
+                <span className="nav-label">{section.name}</span>
+                {section.isBeta && <span className="beta-badge">BETA</span>}
+              </div>
+            )}
           </div>
         ))}
       </div>

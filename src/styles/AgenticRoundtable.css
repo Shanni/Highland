@@ -244,4 +244,101 @@
   .news-feed {
     display: none;
   }
+}
+
+/* Add these new styles */
+
+.chat-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 1rem;
+  height: 100%;
+}
+
+.user-chat-area {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.ai-discussion-area {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  border: 1px solid rgba(177, 177, 134, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.discussion-header {
+  padding: 0.75rem;
+  border-bottom: 1px solid rgba(177, 177, 134, 0.1);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.discussion-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--color-text-primary);
+}
+
+.discussion-header p {
+  margin: 0.25rem 0 0;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+.discussion-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.discussion-item {
+  padding: 0.5rem;
+  border-bottom: 1px solid rgba(177, 177, 134, 0.1);
+}
+
+.discussion-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.agent-name {
+  font-size: 0.8rem;
+  color: var(--color-primary-light);
+  font-weight: 500;
+}
+
+.discussion-time {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.discussion-content {
+  font-size: 0.85rem;
+  color: var(--color-text-primary);
+  line-height: 1.4;
+}
+
+/* Update responsive design */
+@media (max-width: 1200px) {
+  .chat-layout {
+    grid-template-columns: 1fr 250px;
+  }
+}
+
+@media (max-width: 992px) {
+  .chat-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .ai-discussion-area {
+    display: none;
+  }
 } 
