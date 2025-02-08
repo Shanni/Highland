@@ -4,6 +4,7 @@ import './App.css';
 import Portfolio from './components/Portfolio';
 import WalletConnect from './components/WalletConnect';
 import { config } from './config/wagmi';
+import { Analytics } from "@vercel/analytics/react"
 
 const queryClient = new QueryClient();
 
@@ -21,8 +22,10 @@ function App() {
           </header>
           <main>
             <Portfolio />
+            
           </main>
         </div>
+        <Analytics />
       </QueryClientProvider>
     </WagmiConfig>
   );
