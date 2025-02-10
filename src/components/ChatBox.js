@@ -33,7 +33,7 @@ const ChatBox = ({
 
   useEffect(() => {
     // Initialize socket connection with context data
-    socket.current = io('http://localhost:4000/chat');
+    socket.current = io(process.env.REACT_APP_BACKEND_URL + '/chat' || 'http://localhost:4000/chat');
 
     // Listen for incoming messages
     socket.current.on('output', (message) => {

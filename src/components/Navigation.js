@@ -20,11 +20,11 @@ const Navigation = ({ activeSection, onSectionChange }) => {
       name: 'Portfolio Overview',
       icon: <Layers size={20} />,
     },
-    {
-      id: 'performance',
-      name: 'Performance Metrics',
-      icon: <Activity size={20} />,
-    },
+    // {
+    //   id: 'performance',
+    //   name: 'Performance Metrics',
+    //   icon: <Activity size={20} />,
+    // },
     {
       id: 'roundtable',
       name: 'Agentic Roundtable',
@@ -36,16 +36,16 @@ const Navigation = ({ activeSection, onSectionChange }) => {
       icon: <Zap size={20} />,
       isBeta: true
     },
-    {
-      id: 'history',
-      name: 'Transaction History',
-      icon: <Clock size={20} />,
-    },
-    {
-      id: 'alerts',
-      name: 'Price Alerts',
-      icon: <Bell size={20} />,
-    }
+    // {
+    //   id: 'history',
+    //   name: 'Transaction History',
+    //   icon: <Clock size={20} />,
+    // },
+    // {
+    //   id: 'alerts',
+    //   name: 'Price Alerts',
+    //   icon: <Bell size={20} />,
+    // }
   ];
 
   return (

@@ -18,7 +18,9 @@ Highland is a modern, feature-rich cryptocurrency portfolio management applicati
 
 ### Technical Features
 - Real-time data updates via WebSocket
-- Responsive design for all devices
+- AVS (by Eigen Labs) for transaction verification, deployed example: https://sepolia.basescan.org/tx/0xaee5d31ebe26afb9d9a912556cf29cd4f4df5d21ad83475937a1acc9be10f820
+- Gaianet to link and use local llm for chatting and analysis, ensure security of chatting information. 
+- use Covalent Zero Employee Enterprises (ZEE) to operate multi-agent system. 
 - Secure wallet connection
 - Integration with Covalent API for accurate data
 

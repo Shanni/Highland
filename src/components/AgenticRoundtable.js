@@ -15,7 +15,7 @@ const AgenticRoundtable = () => {
 
   useEffect(() => {
     // Chat socket connection
-    socket.current = io('http://localhost:4000/roundtable');
+    socket.current = io(process.env.REACT_APP_BACKEND_URL + '/roundtable' || 'http://localhost:4000/roundtable');
 
     socket.current.on('output', (message) => {
       setMessages(prev => [...prev, { type: 'assistant', content: message }]);
@@ -23,16 +23,16 @@ const AgenticRoundtable = () => {
     });
 
     // News socket connection
-    const newsSocket = io('http://localhost:4000/news');
+    const newsSocket = io(process.env.REACT_APP_BACKEND_URL + '/news' || 'http://localhost:4000/news');
     
     newsSocket.on('news-update', (newsData) => {
       setNews(prev => [...newsData, ...prev].slice(0, 20));
     });
 
     // AI Discussion socket connection
-    const analysisSocket = io('http://localhost:4000/news-based-analysis');
+    const analysisSocket = io(process.env.REACT_APP_BACKEND_URL + '/news-based-analysis' || 'http://localhost:4000/news-based-analysis');
     
-    analysisSocket.on('analysis-update', (analysis) => {
+    analysisSocket.on('news-analysis', (analysis) => {
       setAiDiscussion(prev => [...prev, analysis]);
     });
 
@@ -138,7 +138,7 @@ const AgenticRoundtable = () => {
             </div>
 
             {/* AI Discussion Area */}
-            <div className="ai-discussion-area">
+            {/* <div className="ai-discussion-area">
               <div className="discussion-header">
                 <h3>AI Market Analysis</h3>
                 <p>Real-time insights from AI agents</p>
@@ -159,7 +159,7 @@ const AgenticRoundtable = () => {
                 ))}
                 <div ref={discussionEndRef} />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

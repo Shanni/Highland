@@ -25,7 +25,7 @@ const OnchainActions = () => {
   const socket = useRef(null);
 
   useEffect(() => {
-    socket.current = io('http://localhost:4000/baseAction');
+    socket.current = io(process.env.REACT_APP_BACKEND_URL + '/baseAction' || 'http://localhost:4000/baseAction');
 
     // Listen for status updates
     socket.current.on('status', (message) => {
