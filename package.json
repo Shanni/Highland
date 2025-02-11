@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^13.2.1",
     "@vercel/analytics": "^1.4.1",
     "@visx/visx": "^3.12.0",
+    "env-cmd": "^10.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-feather": "^2.0.10",
@@ -23,6 +24,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:prod": "env-cmd -f .env.production.local react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
