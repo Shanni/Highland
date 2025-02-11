@@ -5,6 +5,7 @@ import Portfolio from './components/Portfolio';
 import WalletConnect from './components/WalletConnect';
 import { config } from './config/wagmi';
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ function App() {
           </main>
         </div>
         <Analytics />
+        <SpeedInsights />
       </QueryClientProvider>
     </WagmiConfig>
   );
